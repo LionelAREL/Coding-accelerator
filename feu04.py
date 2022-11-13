@@ -1,6 +1,8 @@
-def getBoard():
+import sys
+
+def getBoard(file):
     L= []
-    with open('sudoku.txt',"r") as f:
+    with open(file,"r") as f:
         [L.append(list(line.replace("\n", "").strip())) for line in f.readlines()]
 
     for i in range(len(L)):
@@ -9,13 +11,12 @@ def getBoard():
     return L[:]
 
 
-board = getBoard()
-def printBoard():
+def printBoard(board):
     for i in board:
-        print(i)
+        print(str(i).strip("[]").replace(", ",""))
 
 
-def getEmpty():
+def getEmpty(board):
     for i in range(len(board)):
         for j in range(len(board[0])):
             if board[i][j] == ".":
@@ -23,7 +24,7 @@ def getEmpty():
     return None
                 
 
-def is_valid(value,x,y):
+def is_valid(board,value,x,y):
     for i in range(len(board[x])):
         if i != y and board[x][i] == value:
             return False
@@ -42,23 +43,28 @@ def is_valid(value,x,y):
     return True
 
 
-def resolve():
-    new_target = getEmpty()
+def resolve(board):
+    new_target = getEmpty(board)
     if new_target == None:
         return True
     
     for number_try in range(1,10):
-        if is_valid(number_try,*new_target):
+        if is_valid(board,number_try,*new_target):
             board[new_target[0]][new_target[1]] = number_try
 
-            if resolve() :
+            if resolve(board) :
                 return True
             board[new_target[0]][new_target[1]] = "."
     return False
 
-printBoard()
-resolve()
-print("------")
-printBoard()
 
+try :
+    if len(sys.argv) != 2:
+        raise Exception
+    file=sys.argv[1]
+    board = getBoard(file)
+    resolve(board)
+    printBoard(board)
+except Exception as e:
+    print("erreur.")
 

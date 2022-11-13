@@ -21,17 +21,17 @@ def build(h,w):
         print(bot)
     
 try:
-    w=int(sys.argv[1])
-    h=int(sys.argv[2])
-    if len(sys.argv) != 3 or w<=0 or h<=0:
+    width=int(sys.argv[1])
+    height=int(sys.argv[2])
+    if len(sys.argv) != 3 or width<=0 or height<=0:
         raise Exception
-    if w ==1 and h==1:
+    if width ==1 and height==1:
         print("°")
-    elif w==1 and h==2:
+    elif width==1 and height==2:
         print("°")
         print("°")
     else:
-        build(h,w)
+        build(height,width)
 
 except Exception as e:
     print("erreur.",e)
