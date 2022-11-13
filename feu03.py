@@ -1,3 +1,6 @@
+import sys
+
+
 def remplaceSpace(reference,to_check):
     for i in range(len(reference)):
         temp = ""
@@ -18,8 +21,6 @@ def getFind(file):
     with open(file,"r") as f:
         [L.append(line.replace("\n", "")) for line in f.readlines()]
     return L
-
-import sys
 
 try :
     if len(sys.argv) != 3:

@@ -1,3 +1,5 @@
+import sys 
+
 operators = ["/","*","%","+","-"]
 open_priority = ["[","("]
 close_priority = ["]",")"]
@@ -71,7 +73,6 @@ def operation(calcul):
             i += 1
     return (calcul_result)
 
-import sys 
 argv = sys.argv[1].split(" ")
 result = operation(argv)
 if type(result) == str:
